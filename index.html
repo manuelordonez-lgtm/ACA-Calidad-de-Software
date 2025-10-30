@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende el Abecedario - Educación Infantil</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header con botones Misión y Visión -->
+    <header class="header" id="mainHeader">
+        <div class="header-content">
+            <!-- Título animado con diseño moderno -->
+            <h1 class="logo">
+                <span class="logo-letter">A</span>
+                <span class="logo-letter">B</span>
+                <span class="logo-letter">C</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-word">Aprende</span>
+            </h1>
+            <!-- Reorganizando botones: menú hamburguesa "Nuestro Propósito", Video centrado, y Registro Usuario -->
+            <div class="header-buttons">
+                <!-- Botón hamburguesa Nuestro Propósito -->
+                <button class="btn-header btn-proposito" id="btnProposito">
+                    <span class="btn-icon">📚</span>
+                    <span class="btn-text">Nuestro Propósito</span>
+                </button>
+                
+                <!-- Botón Video Calidad Software centrado -->
+                <button class="btn-header btn-video" id="btnVideo">
+                    <span class="btn-icon">🎥</span>
+                    <span class="btn-text">Video Calidad Software</span>
+                </button>
+                
+                <!-- Botón Registro Usuario -->
+                <button class="btn-header btn-registro" id="btnRegistro">
+                    <span class="btn-icon">👤</span>
+                    <span class="btn-text">Registro Usuario</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Menú desplegable para Nuestro Propósito -->
+        <div class="proposito-menu" id="propositoMenu">
+            <button class="proposito-item" id="btnMision">
+                <span class="proposito-icon">📖</span>
+                <span>Misión</span>
+            </button>
+            <button class="proposito-item" id="btnVision">
+                <span class="proposito-icon">🎯</span>
+                <span>Visión</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Agregando botón Inicio para mostrar/ocultar header -->
+    <button class="btn-inicio" id="btnInicio" style="display: none;">
+        <span class="btn-inicio-icon">🏠</span>
+        <span class="btn-inicio-text">Inicio</span>
+    </button>
+
+    <!-- Contenedor Principal -->
+    <main class="main-container">
+        <!-- Agregando botón hamburguesa y convirtiendo menú en responsive -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Menú de Opciones -->
+        <nav class="menu-nav" id="menuNav">
+            <!-- Mejorando iconos del menú con SVG más llamativos -->
+            <button class="menu-btn active" data-mode="visual">
+                <span class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </span>
+                <span>Ver y Escuchar</span>
+            </button>
+            <button class="menu-btn" data-mode="keyboard">
+                <span class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"></path>
+                    </svg>
+                </span>
+                <span>Identificar</span>
+            </button>
+            <button class="menu-btn" data-mode="write">
+                <span class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                        <path d="M2 2l7.586 7.586"></path>
+                        <circle cx="11" cy="11" r="2"></circle>
+                    </svg>
+                </span>
+                <span>Escribir</span>
+            </button>
+            <!-- Agregando opción 4: Unir letras con arrastre -->
+            <button class="menu-btn" data-mode="connect">
+                <span class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M2 12h20"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <circle cx="5" cy="5" r="2"></circle>
+                        <circle cx="19" cy="5" r="2"></circle>
+                        <circle cx="5" cy="19" r="2"></circle>
+                        <circle cx="19" cy="19" r="2"></circle>
+                    </svg>
+                </span>
+                <span>Conectar</span>
+            </button>
+        </nav>
+
+        <!-- Agregando selector de nivel de dificultad y estadísticas -->
+        <div class="game-controls">
+            <div class="difficulty-selector">
+                <label for="difficultyLevel">Nivel:</label>
+                <select id="difficultyLevel">
+                    <option value="easy">Fácil</option>
+                    <option value="medium" selected>Medio</option>
+                    <option value="hard">Difícil</option>
+                </select>
+                <!-- Agregando indicador visual del nivel activo -->
+                <span class="difficulty-indicator" id="difficultyIndicator">Medio</span>
+            </div>
+            <button class="btn-stats" id="btnStats">
+                📊 Estadísticas
+            </button>
+        </div>
+
+        <!-- Área de Juego -->
+        <div class="game-area">
+            <!-- Modo 1: Visual y Fonético -->
+            <div class="game-mode active" id="modeVisual">
+                <!-- Agregando header con contador y botón reiniciar para opción 1 -->
+                <div class="mode-header-with-reset">
+                    <div class="mode-header-text">
+                        <h2 class="mode-title">Aprende las Letras</h2>
+                        <p class="mode-description">Haz clic en cada letra para escuchar su sonido</p>
+                    </div>
+                    <div class="game-counter">
+                        <div class="counter-item success">
+                            <span class="counter-label">Aciertos:</span>
+                            <span class="counter-icon">✅</span>
+                            <span class="counter-value" id="aciertosVisual">0</span>
+                        </div>
+                        <div class="counter-item error">
+                            <span class="counter-label">Fallos:</span>
+                            <span class="counter-icon">❌</span>
+                            <span class="counter-value" id="fallosVisual">0</span>
+                        </div>
+                    </div>
+                    <button class="btn-reset-game" id="btnResetVisual" title="Reiniciar juego">
+                        🔄
+                    </button>
+                </div>
+                <!-- Agregando barra de progreso -->
+                <div class="progress-container">
+                    <div class="progress-label">Progreso: <span id="progressVisual">0/27</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBarVisual"></div>
+                    </div>
+                </div>
+                <div class="alphabet-grid" id="alphabetGrid"></div>
+            </div>
+
+            <!-- Modo 2: Identificar con Teclado -->
+            <div class="game-mode" id="modeKeyboard">
+                <!-- Distribuyendo abecedarios horizontalmente -->
+                <div class="mode-header-with-reset">
+                    <div class="mode-header-text">
+                        <h2 class="mode-title">¿Qué letra escuchas?</h2>
+                        <p class="mode-description">Escucha la letra y presiona la tecla correcta</p>
+                    </div>
+                    <!-- Agregando etiquetas "Aciertos" y "Fallos" a los contadores -->
+                    <div class="game-counter">
+                        <div class="counter-item success">
+                            <span class="counter-label">Aciertos:</span>
+                            <span class="counter-icon">✅</span>
+                            <span class="counter-value" id="aciertosKeyboard">0</span>
+                        </div>
+                        <div class="counter-item error">
+                            <span class="counter-label">Fallos:</span>
+                            <span class="counter-icon">❌</span>
+                            <span class="counter-value" id="fallosKeyboard">0</span>
+                        </div>
+                    </div>
+                    <button class="btn-reset-game" id="btnResetKeyboard" title="Reiniciar juego">
+                        🔄
+                    </button>
+                </div>
+                <!-- Agregando barra de progreso -->
+                <div class="progress-container">
+                    <div class="progress-label">Progreso: <span id="progressKeyboard">0/27</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBarKeyboard"></div>
+                    </div>
+                </div>
+                <!-- Reorganizando layout horizontal para opción 2 -->
+                <div class="keyboard-game-horizontal">
+                    <div class="keyboard-left">
+                        <div class="letter-display" id="letterDisplay">
+                            <button class="play-sound-btn" id="playSoundBtn">
+                                🔊 Escuchar Letra
+                            </button>
+                        </div>
+                        <div class="keyboard-hint">
+                            <p>Presiona la letra en tu teclado o toca abajo</p>
+                            <div class="current-letter" id="currentLetter">?</div>
+                        </div>
+                    </div>
+                    <div class="keyboard-right">
+                        <!-- Agregando teclado virtual para móviles -->
+                        <div class="virtual-keyboard" id="virtualKeyboard"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modo 3: Escribir/Rellenar -->
+            <div class="game-mode" id="modeWrite">
+                <div class="mode-header-with-reset">
+                    <div class="mode-header-text">
+                        <h2 class="mode-title">Completa el Abecedario</h2>
+                        <p class="mode-description">Escribe las letras que faltan</p>
+                    </div>
+                    <!-- Agregando etiquetas "Aciertos" y "Fallos" a los contadores -->
+                    <div class="game-counter">
+                        <div class="counter-item success">
+                            <span class="counter-label">Aciertos:</span>
+                            <span class="counter-icon">✅</span>
+                            <span class="counter-value" id="aciertosWrite">0</span>
+                        </div>
+                        <div class="counter-item error">
+                            <span class="counter-label">Fallos:</span>
+                            <span class="counter-icon">❌</span>
+                            <span class="counter-value" id="fallosWrite">0</span>
+                        </div>
+                    </div>
+                    <button class="btn-reset-game" id="btnResetWrite" title="Reiniciar ejercicio">
+                        🔄
+                    </button>
+                </div>
+                <!-- Agregando barra de progreso -->
+                <div class="progress-container">
+                    <div class="progress-label">Progreso: <span id="progressWrite">0/27</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBarWrite"></div>
+                    </div>
+                </div>
+                <div class="write-grid" id="writeGrid"></div>
+                <!-- Agregando teclado virtual para móviles en modo escribir -->
+                <div class="virtual-keyboard" id="virtualKeyboardWrite"></div>
+                <button class="btn-check" id="btnCheckWrite">Verificar Respuestas</button>
+            </div>
+
+            <!-- Agregando Modo 4: Conectar letras con arrastre -->
+            <div class="game-mode" id="modeConnect">
+                <div class="mode-header-with-reset">
+                    <div class="mode-header-text">
+                        <h2 class="mode-title">Conecta las Letras</h2>
+                        <p class="mode-description">Arrastra desde la letra objetivo hasta la letra correcta en el abecedario</p>
+                    </div>
+                    <div class="game-counter">
+                        <div class="counter-item success">
+                            <span class="counter-label">Aciertos:</span>
+                            <span class="counter-icon">✅</span>
+                            <span class="counter-value" id="aciertosConnect">0</span>
+                        </div>
+                        <div class="counter-item error">
+                            <span class="counter-label">Fallos:</span>
+                            <span class="counter-icon">❌</span>
+                            <span class="counter-value" id="fallosConnect">0</span>
+                        </div>
+                    </div>
+                    <button class="btn-reset-game" id="btnResetConnect" title="Reiniciar juego">
+                        🔄
+                    </button>
+                </div>
+                <!-- Agregando barra de progreso -->
+                <div class="progress-container">
+                    <div class="progress-label">Progreso: <span id="progressConnect">0/27</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBarConnect"></div>
+                    </div>
+                </div>
+                <!-- Reorganizando layout horizontal para opción 4 -->
+                <div class="connect-game-horizontal">
+                    <div class="connect-left">
+                        <div class="target-letter-container">
+                            <p class="target-instruction">Encuentra esta letra:</p>
+                            <div class="target-letter" id="targetLetter">A</div>
+                        </div>
+                    </div>
+                    <div class="connect-right">
+                        <canvas id="connectCanvas" class="connect-canvas"></canvas>
+                        <div class="connect-grid" id="connectGrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje de Feedback -->
+        <div class="feedback-message" id="feedbackMessage"></div>
+        
+        <!-- Agregando canvas para confeti -->
+        <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+    </main>
+
+    <!-- Footer con Redes Sociales y Calificación -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Redes Sociales -->
+            <div class="social-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-link facebook" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com" target="_blank" class="social-link twitter" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-link instagram" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.07 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266-.057-1.644-.069-4.849-.069-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.073-1.689-.073-4.849 0-3.204.013-3.663.072-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="social-link youtube" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="social-link tiktok" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sistema de Calificación -->
+            <div class="rating-section">
+                <h3>Califica esta página</h3>
+                <div class="stars-container" id="starsContainer">
+                    <span class="star" data-rating="1">⭐</span>
+                    <span class="star" data-rating="2">⭐</span>
+                    <span class="star" data-rating="3">⭐</span>
+                    <span class="star" data-rating="4">⭐</span>
+                    <span class="star" data-rating="5">⭐</span>
+                </div>
+                <p class="rating-text" id="ratingText">Selecciona las estrellas</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ABC Aprende - Educación Infantil</p>
+        </div>
+    </footer>
+
+    <!-- Modal Misión -->
+    <div class="modal" id="modalMision">
+        <div class="modal-content">
+            <span class="modal-close" data-modal="modalMision">&times;</span>
+            <h2>📖 Nuestra Misión</h2>
+            <div class="modal-body">
+                <p>Nuestra misión es proporcionar una herramienta educativa interactiva y divertida que ayude a los niños de preescolar y primaria a aprender el abecedario de manera efectiva.</p>
+                <h3>¿Por qué es importante aprender el abecedario?</h3>
+                <ul>
+                    <li><strong>Base de la lectura:</strong> El abecedario es el fundamento para aprender a leer y escribir.</li>
+                    <li><strong>Desarrollo cognitivo:</strong> Ayuda a desarrollar la memoria, el reconocimiento de patrones y las habilidades lingüísticas.</li>
+                    <li><strong>Comunicación:</strong> Es esencial para expresar ideas y comunicarse efectivamente.</li>
+                    <li><strong>Confianza:</strong> Dominar el abecedario da a los niños confianza en sus habilidades académicas.</li>
+                    <li><strong>Preparación escolar:</strong> Es un requisito fundamental para el éxito en la educación primaria.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Visión -->
+    <div class="modal" id="modalVision">
+        <div class="modal-content">
+            <span class="modal-close" data-modal="modalVision">&times;</span>
+            <h2>🎯 Nuestra Visión</h2>
+            <div class="modal-body">
+                <p>Visualizamos un futuro donde cada niño tenga acceso a herramientas educativas de calidad que hagan del aprendizaje una experiencia emocionante y memorable.</p>
+                <h3>Hacia dónde nos dirigimos:</h3>
+                <ul>
+                    <li><strong>Aprendizaje multisensorial:</strong> Combinamos visual, auditivo y kinestésico para un aprendizaje completo.</li>
+                    <li><strong>Educación inclusiva:</strong> Diseñamos para que todos los niños puedan aprender a su propio ritmo.</li>
+                    <li><strong>Tecnología educativa:</strong> Utilizamos la tecnología para hacer el aprendizaje más accesible y atractivo.</li>
+                    <li><strong>Desarrollo integral:</strong> No solo enseñamos letras, sino que fomentamos la curiosidad y el amor por el aprendizaje.</li>
+                    <li><strong>Impacto duradero:</strong> Creamos bases sólidas que beneficiarán a los niños durante toda su vida académica.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregando modal para Video Calidad Software -->
+    <div class="modal" id="modalVideo">
+        <div class="modal-content modal-video">
+            <span class="modal-close" data-modal="modalVideo">&times;</span>
+            <h2>🎥 Video Calidad Software</h2>
+            <div class="modal-body">
+                <!-- Agregando id al iframe para poder controlarlo desde JavaScript -->
+                <div class="video-container">
+                    <iframe 
+                        id="videoFrame"
+                        width="100%" 
+                        height="400" 
+                        src="https://www.youtube.com/embed/YkJY7PqXLgg" 
+                        title="Video Calidad Software" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregando modal para Registro Usuario -->
+    <div class="modal" id="modalRegistro">
+        <div class="modal-content">
+            <span class="modal-close" data-modal="modalRegistro">&times;</span>
+            <h2>👤 Registro de Usuario</h2>
+            <div class="modal-body">
+                <form class="registro-form" id="registroForm">
+                    <div class="form-group">
+                        <label for="nombreUsuario">Nombre de Usuario:</label>
+                        <input type="text" id="nombreUsuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailUsuario">Correo Electrónico:</label>
+                        <input type="email" id="emailUsuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordUsuario">Contraseña:</label>
+                        <input type="password" id="passwordUsuario" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Registrarse</button>
+                </form>
+                <p class="privacy-note">🔒 Tus datos están protegidos y respetamos tu privacidad</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregando modal de estadísticas -->
+    <div class="modal" id="modalStats">
+        <div class="modal-content">
+            <span class="modal-close" data-modal="modalStats">&times;</span>
+            <h2>📊 Estadísticas de Rendimiento</h2>
+            <div class="modal-body">
+                <!-- Agregando selector de nivel para ver estadísticas por dificultad -->
+                <div class="stats-difficulty-selector">
+                    <label>Ver estadísticas por nivel:</label>
+                    <select id="statsDifficultyLevel">
+                        <option value="easy">Fácil</option>
+                        <option value="medium">Medio</option>
+                        <option value="hard">Difícil</option>
+                        <option value="all">Todos los niveles</option>
+                    </select>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Modo Identificar</h3>
+                        <div class="stat-item">
+                            <span>Aciertos:</span>
+                            <span class="stat-value" id="statAciertosKeyboard">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Fallos:</span>
+                            <span class="stat-value" id="statFallosKeyboard">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Precisión:</span>
+                            <span class="stat-value" id="statPrecisionKeyboard">0%</span>
+                        </div>
+                        <div class="stat-chart">
+                            <div class="chart-bar" id="chartKeyboard"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Modo Escribir</h3>
+                        <div class="stat-item">
+                            <span>Aciertos:</span>
+                            <span class="stat-value" id="statAciertosWrite">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Fallos:</span>
+                            <span class="stat-value" id="statFallosWrite">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Precisión:</span>
+                            <span class="stat-value" id="statPrecisionWrite">0%</span>
+                        </div>
+                        <div class="stat-chart">
+                            <div class="chart-bar" id="chartWrite"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Modo Conectar</h3>
+                        <div class="stat-item">
+                            <span>Aciertos:</span>
+                            <span class="stat-value" id="statAciertosConnect">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Fallos:</span>
+                            <span class="stat-value" id="statFallosConnect">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Precisión:</span>
+                            <span class="stat-value" id="statPrecisionConnect">0%</span>
+                        </div>
+                        <div class="stat-chart">
+                            <div class="chart-bar" id="chartConnect"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-reset-stats" id="btnResetStats">Reiniciar Estadísticas</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

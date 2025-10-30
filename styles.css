@@ -1,0 +1,1628 @@
+/* Reset y Variables */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #ff6b9d;
+  --secondary-color: #4ecdc4;
+  --accent-color: #ffe66d;
+  --success-color: #51cf66;
+  --error-color: #ff6b6b;
+  --bg-color: #f8f9fa;
+  --text-color: #2c3e50;
+  --white: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: "Comic Sans MS", "Arial Rounded MT Bold", cursive, sans-serif;
+  /* Agregando imagen de fondo llamativa y moderna */
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.15) 0%, rgba(78, 205, 196, 0.15) 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="letters" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse"><text x="20" y="50" font-size="60" fill="%23ff6b9d" opacity="0.1" font-family="Arial Black">A</text><text x="120" y="120" font-size="50" fill="%234ecdc4" opacity="0.1" font-family="Arial Black">B</text><text x="60" y="160" font-size="55" fill="%23ffe66d" opacity="0.1" font-family="Arial Black">C</text></pattern></defs><rect width="1200" height="800" fill="url(%23letters)"/></svg>'),
+    linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: cover, 400px 400px, cover;
+  background-attachment: fixed;
+  background-position: center, center, center;
+  color: var(--text-color);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Header */
+.header {
+  background: var(--white);
+  box-shadow: var(--shadow);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  /* Agregando transición para ocultar/mostrar header */
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Clase para ocultar header */
+.header.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Logo animado */
+.logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.logo-letter {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.logo-letter:nth-child(1) {
+  animation-delay: 0s;
+}
+.logo-letter:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.logo-letter:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.logo-separator {
+  color: var(--accent-color);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.logo-word {
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.3);
+  }
+}
+
+/* Botones Header */
+.header-buttons {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  /* Centrando los botones */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Reduciendo tamaño de botones del header */
+.btn-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-header::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-header:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-header:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilos para los nuevos botones Video y Registro */
+.btn-video {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
+}
+
+.btn-registro {
+  background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+}
+
+/* Agregando estilos para el botón Nuestro Propósito */
+.btn-proposito {
+  background: linear-gradient(135deg, #3498db, #2980b9) !important;
+  position: relative;
+}
+
+/* Estilos para el menú desplegable de Nuestro Propósito */
+.proposito-menu {
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  background: var(--white);
+  border-radius: 15px;
+  box-shadow: var(--shadow-lg);
+  padding: 0.5rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 200;
+  min-width: 200px;
+  margin-top: 0.5rem;
+  border: 3px solid var(--secondary-color);
+}
+
+.proposito-menu.show {
+  display: flex;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.proposito-item {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.proposito-item:hover {
+  transform: translateX(5px);
+  box-shadow: var(--shadow);
+}
+
+.proposito-icon {
+  font-size: 1.3rem;
+}
+
+/* Main Container */
+.main-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  position: relative;
+  /* Agregando transición para mover el contenido hacia arriba */
+  transition: margin-top 0.3s ease-in-out;
+}
+
+/* Clase para subir el contenido cuando el header está oculto */
+.main-container.content-up {
+  margin-top: -100px;
+}
+
+/* Agregando estilos para botón hamburguesa */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 150;
+  box-shadow: var(--shadow-lg);
+  /* Agregando transición para mover el botón hamburguesa */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Clase para subir el botón hamburguesa cuando el header está oculto */
+.hamburger-btn.btn-up {
+  top: 80px;
+}
+
+/* Menu Navigation */
+.menu-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  transition: all 0.3s;
+}
+
+/* Agregando efecto de opacidad cuando no está seleccionado */
+.menu-btn {
+  background: var(--white);
+  border: 3px solid transparent;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow);
+  min-width: 150px;
+  opacity: 0.5;
+}
+
+.menu-btn .icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-btn .icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: url(#iconGradient);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.menu-btn:hover .icon svg {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transform: scale(1.1);
+  transition: all 0.3s;
+}
+
+.menu-btn.active .icon svg {
+  stroke: white;
+}
+
+.menu-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.menu-btn.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border-color: var(--primary-color);
+  opacity: 1;
+}
+
+/* Removiendo estilos de menu-item-with-counter y mini-counter */
+
+/* Removiendo estilos de score-container */
+/* Nuevo contenedor para header con botón reiniciar */
+.mode-header-with-reset {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mode-header-text {
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Alineando contadores horizontalmente y haciéndolos más pequeños */
+.game-counter {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  background: var(--white);
+  padding: 0.5rem 0.8rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--secondary-color);
+  align-items: center;
+}
+
+.counter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.counter-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.counter-item.success {
+  color: var(--success-color);
+}
+
+.counter-item.error {
+  color: var(--error-color);
+}
+
+.counter-icon {
+  font-size: 1rem;
+}
+
+.counter-value {
+  font-size: 1.1rem;
+  min-width: 28px;
+  text-align: center;
+  background: var(--bg-color);
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+}
+
+/* Reduciendo tamaño del botón reiniciar */
+.btn-reset-game {
+  background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Game Area */
+.game-area {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  min-height: 500px;
+}
+
+.game-mode {
+  display: none;
+}
+
+.game-mode.active {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mode-title {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.mode-description {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Modo 1: Grid de Letras */
+/* Ajustando tamaño del grid según imagen de referencia */
+.alphabet-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.6rem;
+  margin-top: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.letter-card {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letter-card:hover {
+  transform: translateY(-10px) scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.letter-card:active {
+  transform: scale(0.95);
+}
+
+/* Agregando estilos para letras deshabilitadas en opción 1 */
+.letter-card.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #ccc;
+  pointer-events: none;
+}
+
+.letter-card.disabled:hover {
+  transform: none;
+  box-shadow: var(--shadow);
+}
+
+/* Modo 2: Identificar con Teclado */
+/* Reorganizando layout horizontal para opción 2 */
+.keyboard-game-horizontal {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.keyboard-left {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.keyboard-right {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.keyboard-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.letter-display {
+  text-align: center;
+}
+
+.play-sound-btn {
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  color: var(--white);
+  border: none;
+  /* Ajustando tamaño del botón para mejor visualización */
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+}
+
+.play-sound-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.keyboard-hint {
+  text-align: center;
+}
+
+.keyboard-hint p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.current-letter {
+  /* Reduciendo tamaño para mejor distribución */
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  background: var(--bg-color);
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  margin: 0 auto;
+  box-shadow: var(--shadow);
+}
+
+/* Agregando estilos para teclado virtual */
+.virtual-keyboard {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* Optimizando espaciado del teclado virtual */
+  gap: 0.4rem;
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  padding: 0.8rem;
+  background: var(--bg-color);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+
+.virtual-key {
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  /* Ajustando tamaño de teclas virtuales */
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.virtual-key:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.virtual-key:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.virtual-key.pressed {
+  background: var(--primary-color);
+  transform: scale(0.95);
+}
+
+/* Modo 3: Escribir */
+/* Ajustando tamaño del grid según imagen de referencia */
+.write-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* Optimizando espaciado del grid de escritura */
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.write-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Reduciendo gap para mejor distribución */
+  gap: 0.2rem;
+}
+
+.write-label {
+  /* Ajustando tamaño de etiquetas */
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.write-input {
+  /* Optimizando tamaño de inputs */
+  width: 50px;
+  height: 50px;
+  font-size: 1.4rem;
+  text-align: center;
+  border: 3px solid var(--secondary-color);
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.write-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.3);
+}
+
+.write-input.correct {
+  background: var(--success-color);
+  color: var(--white);
+  border-color: var(--success-color);
+}
+
+.write-input.incorrect {
+  background: var(--error-color);
+  color: var(--white);
+  border-color: var(--error-color);
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+.btn-check {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border: none;
+  /* Ajustando tamaño del botón verificar */
+  padding: 0.9rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+  display: block;
+  margin: 1rem auto 0;
+}
+
+.btn-check:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow);
+}
+
+/* Modo 4: Conectar letras */
+/* Reorganizando layout horizontal para opción 4 */
+.connect-game-horizontal {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.connect-left {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.connect-right {
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.connect-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  position: relative;
+}
+
+.target-letter-container {
+  text-align: center;
+  background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+  /* Reduciendo padding para mejor visualización */
+  padding: 1.2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.target-instruction {
+  /* Ajustando tamaño de instrucción */
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.target-letter {
+  /* Optimizando tamaño de letra objetivo */
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: var(--white);
+  background: var(--primary-color);
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.connect-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* Optimizando espaciado del grid de conectar */
+  gap: 0.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.connect-letter {
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  color: var(--white);
+  border: 3px solid transparent;
+  border-radius: 10px;
+  /* Ajustando tamaño de letras para conectar */
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0.7rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.connect-letter:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.connect-letter:active {
+  transform: scale(0.95);
+}
+
+.connect-letter.dragging {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+
+.connect-letter.correct {
+  background: var(--success-color);
+  animation: correctPulse 0.5s;
+}
+
+.connect-letter.incorrect {
+  background: var(--error-color);
+  animation: shake 0.5s;
+}
+
+@keyframes correctPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Feedback Message */
+.feedback-message {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  box-shadow: var(--shadow-lg);
+  font-weight: bold;
+  font-size: 1.1rem;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.feedback-message.show {
+  opacity: 1;
+}
+
+.feedback-message.success {
+  background: var(--success-color);
+  color: var(--white);
+}
+
+.feedback-message.error {
+  background: var(--error-color);
+  color: var(--white);
+}
+
+/* Footer */
+.footer {
+  background: var(--white);
+  padding: 2rem;
+  margin-top: 3rem;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.social-section h3,
+.rating-section h3 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.social-link {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.social-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+.social-link.facebook {
+  background: #1877f2;
+  color: white;
+}
+
+.social-link.twitter {
+  background: #000000;
+  color: white;
+}
+
+.social-link.instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: white;
+}
+
+.social-link.youtube {
+  background: #ff0000;
+  color: white;
+}
+
+.social-link.tiktok {
+  background: #000000;
+  color: white;
+}
+
+.social-link:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Rating System */
+.stars-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.star {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  filter: grayscale(100%);
+}
+
+.star:hover,
+.star.active {
+  filter: grayscale(0%);
+  transform: scale(1.2);
+}
+
+.rating-text {
+  text-align: center;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show {
+  display: flex;
+  animation: fadeIn 0.3s;
+}
+
+.modal-content {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all 0.3s;
+}
+
+.modal-close:hover {
+  color: var(--error-color);
+  transform: rotate(90deg);
+}
+
+.modal-content h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.modal-body ul {
+  list-style-position: inside;
+  margin-left: 1rem;
+}
+
+.modal-body li {
+  margin-bottom: 0.5rem;
+}
+
+.video-placeholder {
+  background: var(--bg-color);
+  padding: 3rem;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.registro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-submit:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow);
+}
+
+.privacy-note {
+  text-align: center;
+  color: var(--success-color);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Agregando estilos para el modal de video con YouTube embebido */
+.modal-video .modal-content {
+  max-width: 800px;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-top: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  .header-buttons {
+    justify-content: center;
+  }
+
+  .btn-header {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .menu-nav {
+    flex-direction: column;
+  }
+
+  .menu-btn {
+    width: 100%;
+  }
+
+  .alphabet-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+
+  .letter-card {
+    font-size: 1.3rem;
+    padding: 0.6rem;
+  }
+
+  .write-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+
+  .write-input {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+  }
+
+  /* Responsive para modo conectar */
+  .connect-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+
+  .connect-letter {
+    font-size: 1.3rem;
+    padding: 0.6rem;
+  }
+
+  .target-letter {
+    width: 100px;
+    height: 100px;
+    font-size: 3rem;
+  }
+
+  /* Ajustando teclado virtual para móviles */
+  .virtual-keyboard {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+    padding: 0.8rem;
+  }
+
+  .virtual-key {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  /* Mejorando responsive de contadores */
+  .mode-header-with-reset {
+    flex-direction: column;
+    align-items: stretch;
+    /* Reduciendo margen inferior en móvil */
+    margin-bottom: 1.5rem;
+  }
+
+  .game-counter {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Ajustando padding en móvil */
+    padding: 0.6rem 1rem;
+  }
+
+  .counter-item {
+    font-size: 0.8rem;
+  }
+
+  .counter-label {
+    font-size: 0.8rem;
+  }
+
+  .counter-value {
+    font-size: 1rem;
+    min-width: 25px;
+  }
+
+  .btn-reset-game {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    margin: 0 auto;
+  }
+
+  /* Mostrando botón hamburguesa y ocultando menú en móviles */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .menu-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--white);
+    flex-direction: column;
+    padding: 80px 20px 20px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 140;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+  }
+
+  .menu-nav.active {
+    right: 0;
+  }
+
+  .menu-btn {
+    width: 100%;
+    opacity: 1;
+  }
+
+  /* Ajustando layouts horizontales para móviles */
+  .keyboard-game-horizontal {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .keyboard-left,
+  .keyboard-right {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .connect-game-horizontal {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .connect-left,
+  .connect-right {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+/* Estilos para botón Inicio */
+.btn-inicio {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 250;
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.btn-inicio:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-inicio-icon {
+  font-size: 1.3rem;
+}
+
+.btn-inicio-text {
+  font-weight: bold;
+}
+
+/* Agregando estilos para controles de juego */
+.game-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--white);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.difficulty-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.difficulty-selector label {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.difficulty-selector select {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--text-color);
+}
+
+/* Agregando estilos para indicador visual de dificultad */
+.difficulty-indicator {
+  padding: 0.4rem 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.btn-stats {
+  background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+  color: var(--text-color);
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+}
+
+.btn-stats:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Agregando estilos para barra de progreso */
+.progress-container {
+  margin-bottom: 1.5rem;
+  padding: 0.8rem;
+  background: var(--bg-color);
+  border-radius: 10px;
+}
+
+.progress-label {
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 10px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+/* Agregando estilos para confeti */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Agregando estilos para modal de estadísticas */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.stat-card {
+  background: var(--bg-color);
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+
+.stat-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+}
+
+.stat-value {
+  color: var(--secondary-color);
+}
+
+.stat-chart {
+  margin-top: 1rem;
+  height: 30px;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success-color), var(--secondary-color));
+  border-radius: 10px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+.btn-reset-stats {
+  background: linear-gradient(135deg, var(--error-color), var(--primary-color));
+  color: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+  display: block;
+  margin: 2rem auto 0;
+}
+
+.btn-reset-stats:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Agregando estilos para selector de dificultad en estadísticas */
+.stats-difficulty-selector {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-color);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stats-difficulty-selector label {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.stats-difficulty-selector select {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--text-color);
+}
